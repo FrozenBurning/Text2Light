@@ -16,9 +16,7 @@
 ### [Project Page](https://frozenburning.github.io/projects/text2light) | [Video](https://youtu.be/XDx6tOHigPE) | [Paper]()
 
 <tr>
-    <video id="v0" width="100%" autoplay loop muted controls>
-        <source src="https://github.com/FrozenBurning/FrozenBurning.github.io/blob/master/projects/text2light/img/teaser.mp4" type="video/mp4"/>
-    </video>
+    <img src="https://github.com/FrozenBurning/FrozenBurning.github.io/blob/master/projects/text2light/img/teaser.gif" width="100%"/>
 </tr>
 
 </div>
