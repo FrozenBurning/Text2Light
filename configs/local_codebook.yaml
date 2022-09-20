@@ -1,0 +1,46 @@
+model:
+  base_learning_rate: 4.5e-6
+  target: taming.models.vqgan.VQModel
+  params:
+    ckpt_path: 
+    embed_dim: 256
+    n_embed: 1024
+    ddconfig:
+      double_z: False
+      z_channels: 256
+      resolution: 256
+      in_channels: 3
+      out_ch: 3
+      ch: 128
+      ch_mult: [ 1,1,2,2,4]  # num_down = len(ch_mult)-1
+      num_res_blocks: 2
+      attn_resolutions: [16]
+      dropout: 0.0
+
+    lossconfig:
+      target: taming.modules.losses.vqperceptual.VQLPIPSWithDiscriminator
+      params:
+        disc_conditional: False
+        disc_in_channels: 3
+        disc_start: 10000
+        disc_weight: 0.2
+        codebook_weight: 1.0
+
+data:
+  target: taming.data.utils.DataModuleFromConfig
+  params:
+    batch_size: 12
+    num_workers: 8
+    train:
+      target: taming.data.custom.CustomTrain
+      params:
+        training_images_list_file: ./data/meta/train_aug.txt
+        size: 256
+        random_crop: True
+    validation:
+      target: taming.data.custom.CustomTest
+      params:
+        test_images_list_file: ./data/meta/val_aug.txt
+        size: 256
+        random_crop: True
+

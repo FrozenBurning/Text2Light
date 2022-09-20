@@ -1,0 +1,84 @@
+model:
+  base_learning_rate: 4.5e-06
+  target: taming.models.local_sampler.LocalSamplerDualCodebookPE
+  params:
+    cond_stage_key: coord
+    holistic_config:
+      target: taming.models.vqgan.VQCirModel
+      params:
+        ckpt_path: # path to the global codebook
+        embed_dim: 256
+        n_embed: 1024
+        ddconfig:
+          double_z: False
+          z_channels: 256
+          resolution: 256
+          in_channels: 3
+          out_ch: 3
+          ch: 128
+          ch_mult: [ 1,1,2,2,4]  # num_down = len(ch_mult)-1
+          num_res_blocks: 2
+          attn_resolutions: [16]
+          dropout: 0.0
+        lossconfig:
+          target: taming.modules.losses.DummyLoss
+    transformer_config:
+      target: taming.modules.transformer.mingpt.GPT
+      params:
+        vocab_size: 1024
+        block_size: 402 #256(patch code 16x16) + 18 (spherical coord 2*4*2+2) + 128 (holistic 8x16)
+        n_layer: 24
+        n_head: 16
+        n_embd: 1024
+    first_stage_config:
+      target: taming.models.vqgan.VQModel
+      params:
+        ckpt_path: # path to the local codebook
+        embed_dim: 256
+        n_embed: 1024
+        ddconfig:
+          double_z: false
+          z_channels: 256
+          resolution: 256
+          in_channels: 3
+          out_ch: 3
+          ch: 128
+          ch_mult:
+          - 1
+          - 1
+          - 2
+          - 2
+          - 4
+          num_res_blocks: 2
+          attn_resolutions:
+          - 16
+          dropout: 0.0
+        lossconfig:
+          target: taming.modules.losses.DummyLoss
+    cond_stage_config:
+      target: taming.modules.misc.coord.CoordStage
+      params:
+        n_embed: 1024
+        down_factor: 16
+
+data:
+  target: taming.data.utils.DataModuleFromConfig
+  params:
+    batch_size: 24
+    num_workers: 16
+    train:
+      target: taming.data.custom.CustomTrain
+      params:
+        training_images_list_file: ./data/meta/train_aug.txt
+        size: 256
+        coord: True
+        random_crop: True
+        holistic: 128
+    validation:
+      target: taming.data.custom.CustomTest
+      params:
+        test_images_list_file: ./data/meta/val_aug.txt
+        size: 256
+        coord: True
+        random_crop: True
+        holistic: 128

@@ -1,0 +1,7 @@
+logs
+__pycache__
+vgg.pth
+*.png
+*.jpeg
+*.jpg
+data

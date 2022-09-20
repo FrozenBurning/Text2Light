@@ -1,0 +1,31 @@
+name: text2light
+channels:
+  - pytorch
+  - defaults
+dependencies:
+  - python=3.8
+  - torchvision
+  - pytorch=1.7
+  - cudatoolkit=10.2
+  - faiss-cpu
+  - tensorboardx
+  - termcolor
+  - h5py
+  - ftfy
+  - matplotlib
+  - python-lmdb
+  - numpy
+  - pip
+  - pip:
+    - albumentations==0.4.3
+    - opencv-python==4.1.2.30
+    - pudb==2019.2
+    - imageio==2.9.0
+    - imageio-ffmpeg==0.4.2
+    - pytorch-lightning==1.0.8
+    - omegaconf==2.0.0
+    - test-tube>=0.7.5
+    - streamlit>=0.73.1
+    - einops==0.3.0
+    - more-itertools>=8.0.0
+    - transformers==4.3.1
