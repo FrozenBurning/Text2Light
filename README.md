@@ -28,7 +28,7 @@
 
 [09/2022] Paper uploaded to arXiv. [![arXiv](https://img.shields.io/badge/arXiv-2209.09898-b31b1b.svg)](https://arxiv.org/abs/2209.09898)
 
-[09/2022] Model weights released. [![Google Drive](https://img.shields.io/badge/Google%20Drive-4285F4?style=for-the-badge&logo=googledrive&logoColor=yellow)](https://drive.google.com/drive/folders/1X8wUNjYYQ8l3YG1_Fwb0CqFvKvKOQ3Go?usp=sharing)
+[09/2022] Model weights released. [![Google Drive](https://img.shields.io/badge/Google%20Drive-4285F4?style=for-the-badge&logo=googledrive&logoColor=yellow)](https://drive.google.com/drive/folders/1HKBjC7oQOzrkGFKMQmSh6PySv6AycDS3?usp=sharing)
 
 [09/2022] Code released.
 
@@ -60,7 +60,7 @@ conda activate text2light
 
 You may do the following steps to generate HDR panoramas from free-form texts with our models.
 ### Download Pretrained Models
-Please download our checkpoints from [Google Drive](https://drive.google.com/drive/folders/1X8wUNjYYQ8l3YG1_Fwb0CqFvKvKOQ3Go?usp=sharing) to run the following inference scripts. We recommend to save the downloaded models in the `./logs` folder.
+Please download our checkpoints from [Google Drive](https://drive.google.com/drive/folders/1HKBjC7oQOzrkGFKMQmSh6PySv6AycDS3?usp=sharing) to run the following inference scripts. We use the model trained on our full dataset by default (`local_sampler`). Note that we also release models that trained on outdoor (`local_sampler_outdoor`) and indoor (`local_sampler_indoor`) scenes respectively.
 
 ### All-in-one Inference Script
 All inference codes are in [text2light.py](text2light.py), you can learn to use it by:
