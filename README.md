@@ -16,7 +16,7 @@
 <h3>TL;DR</h3>
 <h4>Text2Light can generate HDR panoramas in 4K+ resolution using free-form texts solely. <br> Our high-quality results can be directly applied to downstream tasks, e.g., light 3D scenes and immersive VR.</h4>
 
-### [Project Page](https://frozenburning.github.io/projects/text2light) | [Video](https://youtu.be/XDx6tOHigPE) | [Paper](https://arxiv.org/abs/2209.09898)
+### [Project Page](https://frozenburning.github.io/projects/text2light) | [Video](https://youtu.be/XDx6tOHigPE) | [Paper](https://arxiv.org/abs/2209.09898) | [Colab](https://colab.research.google.com/github/FrozenBurning/Text2Light/blob/master/text2light.ipynb)
 
 <tr>
     <img src="https://github.com/FrozenBurning/FrozenBurning.github.io/blob/master/projects/text2light/img/teaser.gif" width="100%"/>
@@ -25,6 +25,8 @@
 </div>
 
 ## Updates
+
+[09/2022] Our online demo in Colab is released! [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FrozenBurning/Text2Light/blob/master/text2light.ipynb)
 
 [09/2022] Paper uploaded to arXiv. [![arXiv](https://img.shields.io/badge/arXiv-2209.09898-b31b1b.svg)](https://arxiv.org/abs/2209.09898)
 
