@@ -82,6 +82,14 @@ Here are some examples, the output will be saved in `./generated_panorama`:
     # assume your texts is stored in alt.txt
     python text2light.py -rg logs/global_sampler_clip -rl logs/local_sampler_outdoor --outdir ./generated_panorama --text ./alt.txt --clip clip_emb.npy
     ```
+Here are some examples of Text2Light in generating HDRIs. The generated results can be directly used to render 3D scenes like [Barcelona Pavillion](https://download.blender.org/demo/test/pabellon_barcelona_v1.scene_.zip) from [Blender Demo Files](https://www.blender.org/download/demo-files/).
+
+<table>
+<tr>
+    <td align='center' width='50%'><img src="https://github.com/FrozenBurning/FrozenBurning.github.io/blob/master/projects/text2light/img/github_demo_house.jpg" width="100%"/></td>
+    <td align='center' width='50%'><img src="https://github.com/FrozenBurning/FrozenBurning.github.io/blob/master/projects/text2light/img/github_demo_ball.jpg" width="100%"/></td>
+</tr>
+</table>
 
 ## Rendering
 
