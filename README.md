@@ -100,6 +100,12 @@ Open Blender -> Select `Shading` Panel -> Select `Shader Type` as `World` -> Add
 
 You can also refer to this [tutorial](https://www.youtube.com/watch?v=gC4Uqr4E78U).
 
+Here is an example of rendering a landscape in San Francisco using the HDRI with input texts as `landscape photography of mountain ranges under purple and pink skies`.
+
+<tr>
+    <img src="https://github.com/FrozenBurning/FrozenBurning.github.io/blob/master/projects/text2light/img/github_blender.jpg" width="100%"/>
+</tr>
+
 ### From Command line
 For the ease of batch processing, e.g. rendering with multiple HDRIs, we offer scripts in command line for rendering your 3D assets.
 
@@ -121,6 +127,19 @@ For the ease of batch processing, e.g. rendering with multiple HDRIs, we offer s
     ```bash
     blender --background --python rendering_shader_ball.py -- ./rendered_balls 100 1000 PATH_TO_HDRI
     ```
+    The results will be saved in `./rendered_balls` which looks like:
+<table>
+<tr>
+    <td align='center' width='50%'><img src="https://github.com/FrozenBurning/FrozenBurning.github.io/blob/master/projects/text2light/img/rendered_ball/full_[green grass field with trees and mountains in the distance]_balls.png" width="100%"/></td>
+    <td align='center' width='50%'><img src="https://github.com/FrozenBurning/FrozenBurning.github.io/blob/master/projects/text2light/img/rendered_ball/full_[landscape photography of mountain ranges under purple and pink skies]_balls.png" width="100%"/></td>
+</tr>
+<tr>
+    <td align='center' width='50%'><img src="https://github.com/FrozenBurning/FrozenBurning.github.io/blob/master/projects/text2light/img/rendered_ball/full_[Audience, Auditorium, Conference]_balls.png" width="100%"/></td>
+    <td align='center' width='50%'><img src="https://github.com/FrozenBurning/FrozenBurning.github.io/blob/master/projects/text2light/img/rendered_ball/full_[white bed linen with white pillow]_balls.png" width="100%"/></td>
+</tr>
+
+</table>
+    
 
 
 ## Training
