@@ -13,7 +13,7 @@
 
 <strong><a href='https://sa2022.siggraph.org/' target='_blank'>TOG 2022 (Proc. SIGGRAPH Asia)</a></strong>
 
-### [Project Page](https://frozenburning.github.io/projects/text2light) | [Video](https://youtu.be/XDx6tOHigPE) | [Paper]()
+### [Project Page](https://frozenburning.github.io/projects/text2light) | [Video](https://youtu.be/XDx6tOHigPE) | [Paper](https://arxiv.org/abs/2209.09898)
 
 <tr>
     <img src="https://github.com/FrozenBurning/FrozenBurning.github.io/blob/master/projects/text2light/img/teaser.gif" width="100%"/>
@@ -23,7 +23,7 @@
 
 ## Updates
 
-<!-- [09/2022] Paper uploaded to arXiv. [![arXiv](https://img.shields.io/badge/arXiv-0000.00000-b31b1b.svg)]() -->
+[09/2022] Paper uploaded to arXiv. [![arXiv](https://img.shields.io/badge/arXiv-2209.09898-b31b1b.svg)](https://arxiv.org/abs/2209.09898)
 
 [09/2022] Model weights released. [![Google Drive](https://img.shields.io/badge/Google%20Drive-4285F4?style=for-the-badge&logo=googledrive&logoColor=yellow)](https://drive.google.com/drive/folders/1X8wUNjYYQ8l3YG1_Fwb0CqFvKvKOQ3Go?usp=sharing)
 
