@@ -13,6 +13,9 @@
 
 <strong><a href='https://sa2022.siggraph.org/' target='_blank'>TOG 2022 (Proc. SIGGRAPH Asia)</a></strong>
 
+<h3>TL;DR</h3>
+<h4>Text2Light can generate HDR panoramas in 4K+ resolution using free-form texts solely. <br> Our high-quality results can be directly applied to downstream tasks, e.g., light 3D scenes and immersive VR.</h4>
+
 ### [Project Page](https://frozenburning.github.io/projects/text2light) | [Video](https://youtu.be/XDx6tOHigPE) | [Paper](https://arxiv.org/abs/2209.09898)
 
 <tr>
