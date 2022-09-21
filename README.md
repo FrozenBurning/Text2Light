@@ -29,6 +29,23 @@
 
 [09/2022] Code released.
 
+
+## Citation
+If you find our work useful for your research, please consider citing this paper:
+```
+@article{chen2022text2light,
+    title={Text2Light: Zero-Shot Text-Driven HDR Panorama Generation},
+    author={Chen, Zhaoxi and Wang, Guangcong and Liu, Ziwei},
+    journal={ACM Transactions on Graphics (TOG)},
+    volume={41},
+    number={6},
+    articleno={195},
+    pages={1--16},
+    year={2022},
+    publisher={ACM New York, NY, USA}
+}
+```
+
 ## Installation
 We highly recommend using [Anaconda](https://www.anaconda.com/) to manage your python environment. You can setup the required environment by the following command:
 ```bash
