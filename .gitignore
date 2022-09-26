@@ -4,4 +4,4 @@ vgg.pth
 *.png
 *.jpeg
 *.jpg
-data
+data/*
