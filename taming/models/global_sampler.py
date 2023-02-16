@@ -164,11 +164,10 @@ class GlobalSamplerWithCLIP(GlobalSampler):
                 z_start_indices = torch.cat((z_start_indices, ix), dim=1)
 
         index_sample = z_start_indices
-        with torch.no_grad():
-            x_sample_nopix = self.decode_to_img(index_sample, [index_sample.shape[0], 256, 8, 16]) #hack
-            preprocess = _transform(224)
-            gen_img_emb = self.clip.encode_image(preprocess(x_sample_nopix))
-            gen_img_emb /= gen_img_emb.norm(dim=-1, keepdim=True)
+        x_sample_nopix = self.decode_to_img(index_sample, [index_sample.shape[0], 256, 8, 16])
+        preprocess = _transform(224)
+        gen_img_emb = self.clip.encode_image(preprocess(x_sample_nopix))
+        gen_img_emb /= gen_img_emb.norm(dim=-1, keepdim=True)
         
         psed_emb = batch['psed_emb']
         sim = torch.cosine_similarity(gen_img_emb.unsqueeze(1), psed_emb.unsqueeze(0), dim=-1)
