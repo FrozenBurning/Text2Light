@@ -121,3 +121,14 @@ class VectorQuantizer(nn.Module):
             z_q = z_q.permute(0, 3, 1, 2).contiguous()
 
         return z_q
+
+    def get_codebook_entry_diff(self, onehots, shape):
+        # get quantized latent vectors
+        z_q = onehots @ self.embedding.weight
+
+        if shape is not None:
+            z_q = z_q.view(shape)
+            # reshape back to match original input shape
+            z_q = z_q.permute(0, 3, 1, 2).contiguous()
+
+        return z_q

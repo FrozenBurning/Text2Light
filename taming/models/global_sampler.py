@@ -121,6 +121,14 @@ class GlobalSampler(BaseSampler):
                 x = torch.cat((x, ix), dim=1)
         return x
 
+    def decode_to_img_diff(self, onehot, zshape):
+        # index = self.permuter(index, reverse=True)
+        _, _, f_dim = onehot.shape
+        bhwc = (zshape[0],zshape[2],zshape[3],zshape[1])
+        quant_z = self.first_stage_model.quantize.get_codebook_entry_diff(
+            onehot.reshape(-1, f_dim), shape=bhwc)
+        x = self.first_stage_model.decode(quant_z)
+        return x
 
 class GlobalSamplerWithCLIP(GlobalSampler):
     def __init__(self, transformer_config, first_stage_config, cond_stage_config, permuter_config=None, ckpt_path=None, ignore_keys=[], first_stage_key="image", cond_stage_key="depth", downsample_cond_size=-1, pkeep=1, sos_token=0, unconditional=False):
@@ -135,48 +143,26 @@ class GlobalSamplerWithCLIP(GlobalSampler):
         x, c = self.get_xc(batch)
         logits, target = self(x, c)
         z_indices = target
-        z_start_indices = z_indices[:, :0]
 
         cb, _, knn, cd = c.shape
         c = c.reshape(cb, knn, cd)
         c = torch.cat([c, c,], dim=-1)
 
-        steps = z_indices.shape[1]
-        block_size = self.transformer.get_block_size() - 5
-        callback = lambda k: None
-        if self.pkeep <= 0.0:
-            raise NotImplementedError
-        else:
-            for k in range(steps):
-                callback(k)
-                assert z_start_indices.size(1) <= block_size # make sure model can see conditioning
-                x_cond = z_start_indices if z_start_indices.size(1) <= block_size else z_start_indices[:, -block_size:]  # crop context if needed
-                lo, _ = self.transformer(x_cond, embeddings=c)
-                # pluck the logits at the final step and scale by temperature
-                lo = lo[:, -1, :] / 1.0
-                # optionally crop probabilities to only the top k options
-                lo = self.top_k_logits(lo, 100)
-                # apply softmax to convert to probabilities
-                probs = F.softmax(lo, dim=-1)
-                # sample from the distribution or take the most likely
-                ix = torch.multinomial(probs, num_samples=1)
-                # append to the sequence and continue
-                z_start_indices = torch.cat((z_start_indices, ix), dim=1)
-
-        index_sample = z_start_indices
-        x_sample_nopix = self.decode_to_img(index_sample, [index_sample.shape[0], 256, 8, 16])
+        index_sample = F.gumbel_softmax(logits, hard=True)
+        x_sample_nopix = self.decode_to_img_diff(index_sample, [index_sample.shape[0], 256, 8, 16])
         preprocess = _transform(224)
         gen_img_emb = self.clip.encode_image(preprocess(x_sample_nopix))
-        gen_img_emb /= gen_img_emb.norm(dim=-1, keepdim=True)
-        
+        gnorm = gen_img_emb.norm(dim=-1, keepdim=True)
+        gen_img_emb_normed = gen_img_emb / gnorm
+
         psed_emb = batch['psed_emb']
-        sim = torch.cosine_similarity(gen_img_emb.unsqueeze(1), psed_emb.unsqueeze(0), dim=-1)
+        sim = torch.cosine_similarity(gen_img_emb_normed.unsqueeze(1), psed_emb.unsqueeze(0), dim=-1)
         temp = 0.5
-        sim = torch.exp(sim/temp)
-        sim2 = torch.diagonal(F.softmax(sim, dim=0))*temp
-        contra_loss = torch.log(sim2).mean()
+        sim = torch.exp(sim / temp)
+        sim2 = torch.diagonal(F.softmax(sim, dim = 0)) * temp
+        contra_loss = -torch.log(sim2).mean()
         loss = F.cross_entropy(logits.reshape(-1, logits.size(-1)), target.reshape(-1))
-        return loss - contra_loss, -contra_loss
+        return loss + 0.1 * contra_loss, contra_loss
 
     def training_step(self, batch, batch_idx):
         loss, contra_loss = self.shared_step(batch, batch_idx)
