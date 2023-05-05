@@ -25,6 +25,7 @@
 </div>
 
 ## Updates
+[05/2023] Release text descriptions used during inference. [![Google Drive](https://img.shields.io/badge/Google%20Drive-4285F4?style=for-the-badge&logo=googledrive&logoColor=yellow)](https://drive.google.com/drive/folders/1TtzS28GCbc-iTIAqtgCh_JTSJDoXUGAJ?usp=share_link)
 
 [09/2022] Our online demo in Colab is released! [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FrozenBurning/Text2Light/blob/master/text2light.ipynb)
 
